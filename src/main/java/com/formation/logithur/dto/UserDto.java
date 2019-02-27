@@ -6,6 +6,8 @@ public class UserDto {
 	
 	// Attribute's Declaration
 	
+	private Long id;
+	
 	private String email;
 	
 	private String nickname;
@@ -47,5 +49,15 @@ public class UserDto {
 	public void setMark(Double mark) {
 		this.mark = mark;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 	
 }

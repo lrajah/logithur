@@ -1,5 +1,7 @@
 package com.formation.logithur.persistence.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.UserDto;
+import com.formation.logithur.persistence.repository.UserRepository;
 
 @Entity
 @Table(name="user")
@@ -36,10 +39,11 @@ public class User {
 	
 		public User() { }
 	
-		public User(UserDto user) {
+		public User(UserDto user, UserRepository userRepo) {
 			this.setEmail(user.getEmail());
 			this.setNickname(user.getNickname());
 			this.setMark(user.getMark());
+			Optional<User> userTmp = userRepo.findById(user.getId());
 		}
 			
 	// Getters And Setters
@@ -58,14 +62,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getNickname() {
