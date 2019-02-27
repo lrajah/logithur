@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.formation.logithur.dto.UserDto;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -26,8 +28,20 @@ public class User {
 	
 	@Column (name = "password", length = 20, nullable = false)
 	private String password;
-		
 	
+	@Column (name = "mark")
+	private Double mark;
+	
+	// Constructor
+	
+		public User() { }
+	
+		public User(UserDto user) {
+			this.setEmail(user.getEmail());
+			this.setNickname(user.getNickname());
+			this.setMark(user.getMark());
+		}
+			
 	// Getters And Setters
 
 	public Long getId() {
@@ -60,6 +74,14 @@ public class User {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public Double getMark() {
+		return mark;
+	}
+
+	public void setMark(Double mark) {
+		this.mark = mark;
 	}
 
 }
