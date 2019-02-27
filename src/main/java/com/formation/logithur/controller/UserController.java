@@ -19,7 +19,7 @@ public class UserController {
 	
 	@PostMapping(value = "/new")
 	@ResponseBody
-	public UserDto newUser(	@RequestBody UserDto userDto) {
+	public UserDto newUser(@RequestBody UserDto userDto) {
 		return userServ.userNew(userDto);	
 	}
 
