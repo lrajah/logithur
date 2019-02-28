@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.formation.logithur.dto.TaskDto;
+import com.formation.logithur.exception.NotFoundException;
 import com.formation.logithur.persistence.entity.Task;
 import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.CategoryRepository;
@@ -35,13 +36,14 @@ public class TaskService implements ITaskService {
 
 	@Override
 	public TaskDto findById(Long id) {
-		// TODO Gérer gestion des erreurs
-		return new TaskDto(taskRepo.findById(id).get());
+		Optional<Task> task= taskRepo.findById(id);
+		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
+		return new TaskDto(task.get());
 	}
 
 	@Override
 	public TaskDto createTask(TaskDto taskDto) throws ParseException {
-		// TODO Auto-generated method stub
+		
 		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
 	}
 
@@ -51,7 +53,7 @@ public class TaskService implements ITaskService {
 		
 		Optional<Task> task= taskRepo.findById(oldTaskId);
 		// TODO check if task exist in db
-		
+		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
 		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
 		
 		

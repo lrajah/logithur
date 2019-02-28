@@ -1,5 +1,6 @@
 package com.formation.logithur.persistence.entity;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.UserDto;
@@ -34,6 +37,9 @@ public class User {
 	
 	@Column (name = "mark")
 	private Double mark;
+	@ManyToMany
+	@JoinColumn(name = "idTask", referencedColumnName = "id")
+	private List<Task> task;
 	
 	// Constructor
 	
