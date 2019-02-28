@@ -53,6 +53,14 @@ public class User {
 			this.setMark(user.getMark());			
 			this.setPassword(userTmp.get().getPassword());			
 		}
+		
+		public User(UserDto user) {
+			
+			this.setEmail(user.getEmail());
+			this.setNickname(user.getNickname());
+			this.setMark(user.getMark());			
+			this.setPassword(user.getPassword());			
+		}
 			
 	// Getters And Setters
 

@@ -12,7 +12,10 @@ public class UserDto {
 	
 	private String nickname;
 	
+	private String password;
+	
 	private Double mark;
+	
 		
 	// Constructor
 	
@@ -22,6 +25,7 @@ public class UserDto {
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());
+		this.setPassword(null);
 	}
 	
 	// Getters and Setters
@@ -57,7 +61,14 @@ public class UserDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	
 }
