@@ -40,10 +40,12 @@ public class User {
 		public User() { }
 	
 		public User(UserDto user, UserRepository userRepo) {
+			Optional<User> userTmp = userRepo.findById(user.getId());
+			
 			this.setEmail(user.getEmail());
 			this.setNickname(user.getNickname());
-			this.setMark(user.getMark());
-			Optional<User> userTmp = userRepo.findById(user.getId());
+			this.setMark(user.getMark());			
+			this.setPassword(userTmp.get().getPassword());			
 		}
 			
 	// Getters And Setters
