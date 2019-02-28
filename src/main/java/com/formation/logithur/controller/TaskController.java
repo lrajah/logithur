@@ -21,9 +21,11 @@ public class TaskController {
 	@Autowired
 	ITaskService taskServ;
 	
-	@GetMapping
+	@GetMapping(value="/{userName}")
 	@ResponseBody
 	List<TaskDto> findByUser(@PathVariable String userName){
+		
+		return taskServ.findByUser(userName);
 		
 	}
 

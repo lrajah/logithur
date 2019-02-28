@@ -9,7 +9,7 @@ import com.formation.logithur.persistence.entity.Task;
 
 public interface ITaskService {
 	
-	List<Task> findByUser(String userName);
+	List<TaskDto> findByUser(String userName);
 	TaskDto findById(Long id);
 	TaskDto createTask(TaskDto taskDto) throws ParseException;
 	TaskDto modifyTask(TaskDto taskDto, Long oldTaskId) throws ParseException;

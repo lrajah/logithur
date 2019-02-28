@@ -104,4 +104,13 @@ public class User {
 		this.mark = mark;
 	}
 
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
+	}
+
+	
 }

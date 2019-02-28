@@ -3,6 +3,7 @@ package com.formation.logithur.service.impl;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -29,9 +30,11 @@ public class TaskService implements ITaskService {
 	private CategoryRepository categoryRepo;
 
 	@Override
-	public List<Task> findByUser(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TaskDto> findByUser(String userName) {
+		// TODO 
+		Optional<User> user=userRepo.findByNickname(userName);
+		if(!user.isPresent()) throw new NotFoundException("L'utilisateur demandé n'existe pas");		
+		return user.get().getTask().stream().map(c -> new TaskDto(c)).collect(Collectors.toList());
 	}
 
 	@Override
