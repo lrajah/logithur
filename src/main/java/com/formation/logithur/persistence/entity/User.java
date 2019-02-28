@@ -1,11 +1,16 @@
 package com.formation.logithur.persistence.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.formation.logithur.dto.UserDto;
+import com.formation.logithur.persistence.repository.UserRepository;
 
 @Entity
 @Table(name="user")
@@ -26,8 +31,21 @@ public class User {
 	
 	@Column (name = "password", length = 20, nullable = false)
 	private String password;
-		
 	
+	@Column (name = "mark")
+	private Double mark;
+	
+	// Constructor
+	
+		public User() { }
+	
+		public User(UserDto user, UserRepository userRepo) {
+			this.setEmail(user.getEmail());
+			this.setNickname(user.getNickname());
+			this.setMark(user.getMark());
+			Optional<User> userTmp = userRepo.findById(user.getId());
+		}
+			
 	// Getters And Setters
 
 	public Long getId() {
@@ -46,6 +64,14 @@ public class User {
 		this.email = email;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -54,12 +80,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public Double getMark() {
+		return mark;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setMark(Double mark) {
+		this.mark = mark;
 	}
 
 }
