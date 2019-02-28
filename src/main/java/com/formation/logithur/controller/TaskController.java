@@ -16,7 +16,7 @@ import com.formation.logithur.service.ITaskService;
 @CrossOrigin
 @RestController
 @RequestMapping(value="/api/client/task")
-public class ControllerTask {
+public class TaskController {
 	
 	@Autowired
 	ITaskService taskServ;
