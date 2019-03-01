@@ -15,55 +15,84 @@ import javax.persistence.Table;
 import com.formation.logithur.dto.UserDto;
 import com.formation.logithur.persistence.repository.UserRepository;
 
+/**
+ * Entité Utilisateur <b><b>Class Entité Utilisateur - 
+ * Définition de la table et de ses attributs
+ * 
+ * @author Arzh
+ * @version 1.0.0
+ */
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
-	
+
 	// Attribute's Declaration
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column (name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@Column (name = "email", length = 60, unique = true, nullable = false)
+
+	@Column(name = "email", length = 60, unique = true, nullable = false)
 	private String email;
-	
-	@Column (name = "nickname", length = 20, unique = true, nullable = false)
+
+	@Column(name = "nickname", length = 20, unique = true, nullable = false)
 	private String nickname;
-	
-	@Column (name = "password", length = 20, nullable = false)
+
+	@Column(name = "password", length = 20, nullable = false)
 	private String password;
-	
-	@Column (name = "mark")
+
+	@Column(name = "mark")
 	private Double mark;
+
 	@ManyToMany
 	@JoinColumn(name = "idTask", referencedColumnName = "id")
 	private List<Task> task;
-	
+
 	// Constructor
-	
-		public User() { }
-	
-		public User(UserDto user, UserRepository userRepo) {
-			Optional<User> userTmp = userRepo.findById(user.getId());
-			
-			this.setEmail(user.getEmail());
-			this.setNickname(user.getNickname());
-			this.setMark(user.getMark());			
-			this.setPassword(userTmp.get().getPassword());			
-		}
-		
-		public User(UserDto user) {
-			
-			this.setEmail(user.getEmail());
-			this.setNickname(user.getNickname());
-			this.setMark(user.getMark());			
-			this.setPassword(user.getPassword());			
-		}
-			
+
+	/**
+	 * Constructeur User <b><b>Constructeur par défaut
+	 * 
+	 * @author Arzh
+	 */
+	public User() {
+	}
+
+	/**
+	 * Constructeur User <b><b>Constructeur avec un Dto et un Repository d'utilisateur
+	 * en paramètre
+	 * 
+	 * @param user     - Dto Utilisateur
+	 * @param userRepo - Repository Utilisateur
+	 * @author Arzh
+	 */
+	public User(UserDto user, UserRepository userRepo) {
+		Optional<User> userTmp = userRepo.findById(user.getId());
+
+		this.setEmail(user.getEmail());
+		this.setNickname(user.getNickname());
+		this.setMark(user.getMark());
+		this.setPassword(userTmp.get().getPassword());
+	}
+
+	/**
+	 * Constructeur User <b><b>Constructeur avec un Dto d'utilisateur en paramètre
+	 * 
+	 * @param user - Dto Utilisateur
+	 * @author Arzh
+	 */
+	public User(UserDto user) {
+
+		this.setEmail(user.getEmail());
+		this.setNickname(user.getNickname());
+		this.setMark(user.getMark());
+		this.setPassword(user.getPassword());
+	}
+
 	// Getters And Setters
 
+	// ID
 	public Long getId() {
 		return id;
 	}
@@ -72,6 +101,7 @@ public class User {
 		this.id = id;
 	}
 
+	// Email
 	public String getEmail() {
 		return email;
 	}
@@ -80,6 +110,7 @@ public class User {
 		this.email = email;
 	}
 
+	// Nickname
 	public String getNickname() {
 		return nickname;
 	}
@@ -87,7 +118,8 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+
+	// Password
 	public String getPassword() {
 		return password;
 	}
@@ -96,6 +128,7 @@ public class User {
 		this.password = password;
 	}
 
+	// Mark
 	public Double getMark() {
 		return mark;
 	}
@@ -103,5 +136,4 @@ public class User {
 	public void setMark(Double mark) {
 		this.mark = mark;
 	}
-
 }

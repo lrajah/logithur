@@ -10,13 +10,18 @@ import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.UserRepository;
 import com.formation.logithur.service.IUserService;
 
+/**
+ * Service Utilisateur <b><b>Class Service Utilisateur -
+ * Définition des différentes méthodes pour l'utilisateur
+ * 
+ * @author Arzh
+ * @version 1.0.0
+ */
 @Service
 public class UserService implements IUserService {
 	
 	@Autowired 
-	UserRepository userRepo;
-	
-	// Method for create user
+	UserRepository userRepo;	
 	
 	@Override
 	public UserDto userNew(UserDto userDto) {
@@ -31,14 +36,11 @@ public class UserService implements IUserService {
 			
 		} else if(userNoExistNickname.isPresent()) {
 			
-			//TODO Exception surnom
+			// TODO Exception surnom
 		}
 		
-		return new UserDto(userRepo.save(userNew));
-				
+		return new UserDto(userRepo.save(userNew));				
 	};	
-	
-	// Method for modify user
 	
 	@Override
 	public UserDto userModify(UserDto userDto, UserRepository userRepo) {
@@ -52,15 +54,10 @@ public class UserService implements IUserService {
 			
 		} else {	
 			
-			// TODO Gérer les exceptions
-			System.out.println("L'utilisateur n'existe pas");
-			return userDto;
-			
+			// TODO Exception user n'existe pas
+			return userDto;			
 		}
-		
-		
 	};
-
 }
 	
 	
