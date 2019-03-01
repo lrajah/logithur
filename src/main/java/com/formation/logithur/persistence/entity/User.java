@@ -15,6 +15,13 @@ import javax.persistence.Table;
 import com.formation.logithur.dto.UserDto;
 import com.formation.logithur.persistence.repository.UserRepository;
 
+/**
+ * Entité Utilisateur <b><b>Class Entité Utilisateur - 
+ * Définition de la table et de ses attributs
+ * 
+ * @author Arzh
+ * @version 1.0.0
+ */
 @Entity
 @Table(name="user")
 public class User {
@@ -40,28 +47,48 @@ public class User {
 	@OneToMany
 	@JoinColumn(name = "idTask", referencedColumnName = "id")
 	private List<Task> task;
-	
+
 	// Constructor
-	
-		public User() { }
-	
-		public User(UserDto user, UserRepository userRepo) {
-			Optional<User> userTmp = userRepo.findById(user.getId());
-			
-			this.setEmail(user.getEmail());
-			this.setNickname(user.getNickname());
-			this.setMark(user.getMark());			
-			this.setPassword(userTmp.get().getPassword());			
-		}
-		
-		public User(UserDto user) {
-			
-			this.setEmail(user.getEmail());
-			this.setNickname(user.getNickname());
-			this.setMark(user.getMark());			
-			this.setPassword(user.getPassword());			
-		}
-			
+
+	/**
+	 * Constructeur User <b><b>Constructeur par défaut
+	 * 
+	 * @author Arzh
+	 */
+	public User() {
+	}
+
+	/**
+	 * Constructeur User <b><b>Constructeur avec un Dto et un Repository d'utilisateur
+	 * en paramètre
+	 * 
+	 * @param user     - Dto Utilisateur
+	 * @param userRepo - Repository Utilisateur
+	 * @author Arzh
+	 */
+	public User(UserDto user, UserRepository userRepo) {
+		Optional<User> userTmp = userRepo.findById(user.getId());
+
+		this.setEmail(user.getEmail());
+		this.setNickname(user.getNickname());
+		this.setMark(user.getMark());
+		this.setPassword(userTmp.get().getPassword());
+	}
+
+	/**
+	 * Constructeur User <b><b>Constructeur avec un Dto d'utilisateur en paramètre
+	 * 
+	 * @param user - Dto Utilisateur
+	 * @author Arzh
+	 */
+	public User(UserDto user) {
+
+		this.setEmail(user.getEmail());
+		this.setNickname(user.getNickname());
+		this.setMark(user.getMark());
+		this.setPassword(user.getPassword());
+	}
+
 	// Getters And Setters
 
 	public Long getId() {
