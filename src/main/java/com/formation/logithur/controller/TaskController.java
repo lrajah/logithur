@@ -36,7 +36,7 @@ public class TaskController {
 	@ResponseBody
 	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException{
 		
-		return taskServ.createTask(taskDto, taskDto.getUsers().get(0).getNickname() );
+		return taskServ.createTask(taskDto, taskDto.getUsers().getNickname() );
 		
 	}
 }

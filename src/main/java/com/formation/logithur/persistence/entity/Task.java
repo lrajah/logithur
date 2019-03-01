@@ -52,9 +52,9 @@ public class Task {
 	@JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = true)
 	private Category category;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "idUser", referencedColumnName = "id", nullable = false)
-	private List<User> users;
+	private User users;
 	
 	
 	public Task(TaskDto t, UserRepository userRepo) throws ParseException {
@@ -70,7 +70,7 @@ public class Task {
 		this.setId(t.getId());
 		this.setLabel(t.getLabel());
 		this.setPriority(t.getPriority());
-		this.setUsers(t.getUsers().stream().map(c-> new User(c,userRepo)).collect(Collectors.toList()));
+		this.setUsers(new User(t.getUsers(), userRepo));
 	}
 	public Task() {
 		
@@ -122,14 +122,13 @@ public class Task {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-
-	public List<User> getUsers() {
+	public User getUsers() {
 		return users;
 	}
-
-	public void setUsers(List<User> users) {
+	public void setUsers(User users) {
 		this.users = users;
 	}
+
 	
 	
 

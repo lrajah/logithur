@@ -31,7 +31,7 @@ public class TaskDto {
 	
 	private boolean state;
 
-	private List<UserDto> users;
+	private UserDto users;
 
 	public TaskDto(Task t) {
 		
@@ -44,7 +44,7 @@ public class TaskDto {
 		this.setPriority(t.getPriority());
 		this.setCategory(t.getCategory());
 		
-		this.setUsers(t.getUsers().stream().map(c -> new UserDto(c)).collect(Collectors.toList()));
+		this.setUsers(new UserDto(t.getUsers()));
 		this.setState(t.getState());
 	}
 	
@@ -105,12 +105,16 @@ public class TaskDto {
 		this.category = category;
 	}
 
-	public List<UserDto> getUsers() {
+
+	public UserDto getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<UserDto> users) {
+
+	public void setUsers(UserDto users) {
 		this.users = users;
 	}
+
+	
 
 }

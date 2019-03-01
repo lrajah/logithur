@@ -53,7 +53,10 @@ public class TaskService implements ITaskService {
 		Optional<User> user = userRepo.findByNickname(userName);
 		Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
 		if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+		else taskDto.setCategory(cat.get());
 		Task task =new Task(taskDto, userRepo) ;
+		user.get().getTask().add(task);
+		task.setUsers(user.get());
 		task=taskRepo.save(task);
 		user.get().getTask().add(task);
 		userRepo.save(user.get());

@@ -22,6 +22,7 @@ public class UserDto {
 	public UserDto() { } 
 	
 	public UserDto(User user) {
+		this.setId(user.getId());
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());
