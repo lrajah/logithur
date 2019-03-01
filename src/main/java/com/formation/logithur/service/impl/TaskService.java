@@ -3,6 +3,7 @@ package com.formation.logithur.service.impl;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.formation.logithur.dto.TaskDto;
 import com.formation.logithur.exception.NotFoundException;
+import com.formation.logithur.persistence.entity.Category;
 import com.formation.logithur.persistence.entity.Task;
 import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.CategoryRepository;
@@ -29,9 +31,11 @@ public class TaskService implements ITaskService {
 	private CategoryRepository categoryRepo;
 
 	@Override
-	public List<Task> findByUser(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TaskDto> findByUser(String userName) {
+		// TODO 
+		Optional<User> user=userRepo.findByNickname(userName);
+		if(!user.isPresent()) throw new NotFoundException("L'utilisateur demandé n'existe pas");		
+		return user.get().getTask().stream().map(c -> new TaskDto(c)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -41,10 +45,24 @@ public class TaskService implements ITaskService {
 		return new TaskDto(task.get());
 	}
 
+	
+	
 	@Override
-	public TaskDto createTask(TaskDto taskDto) throws ParseException {
+	public TaskDto createTask(TaskDto taskDto, String userName) throws ParseException {
 		
-		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
+		Optional<User> user = userRepo.findByNickname(userName);
+		Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
+		if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+		else taskDto.setCategory(cat.get());
+		Task task =new Task(taskDto, userRepo) ;
+		user.get().getTask().add(task);
+		task.setUsers(user.get());
+		task=taskRepo.save(task);
+		user.get().getTask().add(task);
+		userRepo.save(user.get());
+		
+		return new TaskDto(task) ;
+		
 	}
 
 	@Override
@@ -52,8 +70,10 @@ public class TaskService implements ITaskService {
 		
 		
 		Optional<Task> task= taskRepo.findById(oldTaskId);
+		
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
+		
 		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
 		
 		

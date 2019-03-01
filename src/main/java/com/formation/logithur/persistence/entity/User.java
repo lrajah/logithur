@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.UserDto;
@@ -23,29 +23,28 @@ import com.formation.logithur.persistence.repository.UserRepository;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "user")
+@Table(name="user")
 public class User {
-
+	
 	// Attribute's Declaration
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column (name = "id", unique = true, nullable = false)
 	private Long id;
-
-	@Column(name = "email", length = 60, unique = true, nullable = false)
+	
+	@Column (name = "email", length = 60, unique = true, nullable = false)
 	private String email;
-
-	@Column(name = "nickname", length = 20, unique = true, nullable = false)
+	
+	@Column (name = "nickname", length = 20, unique = true, nullable = false)
 	private String nickname;
-
-	@Column(name = "password", length = 20, nullable = false)
+	
+	@Column (name = "password", length = 20, nullable = false)
 	private String password;
-
-	@Column(name = "mark")
+	
+	@Column (name = "mark")
 	private Double mark;
-
-	@ManyToMany
+	@OneToMany
 	@JoinColumn(name = "idTask", referencedColumnName = "id")
 	private List<Task> task;
 
@@ -92,7 +91,6 @@ public class User {
 
 	// Getters And Setters
 
-	// ID
 	public Long getId() {
 		return id;
 	}
@@ -101,7 +99,6 @@ public class User {
 		this.id = id;
 	}
 
-	// Email
 	public String getEmail() {
 		return email;
 	}
@@ -110,7 +107,6 @@ public class User {
 		this.email = email;
 	}
 
-	// Nickname
 	public String getNickname() {
 		return nickname;
 	}
@@ -118,8 +114,7 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
-	// Password
+	
 	public String getPassword() {
 		return password;
 	}
@@ -128,7 +123,6 @@ public class User {
 		this.password = password;
 	}
 
-	// Mark
 	public Double getMark() {
 		return mark;
 	}
@@ -136,4 +130,14 @@ public class User {
 	public void setMark(Double mark) {
 		this.mark = mark;
 	}
+
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
+	}
+
+	
 }

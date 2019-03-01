@@ -1,6 +1,7 @@
 package com.formation.logithur.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ import com.formation.logithur.service.IUserService;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value="/api/client/user")
+@RequestMapping(value="/api/client/")
 public class UserController {
 		
 		@Autowired
@@ -38,5 +39,4 @@ public class UserController {
 			return userServ.userModify(userModifyDto, userModifyRepo);
 		}
 		
-	}
-
+}
