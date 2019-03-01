@@ -11,4 +11,8 @@ import com.formation.logithur.persistence.entity.Task;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 	@Query(value="SELECT * FROM user WHERE nickname=?1", nativeQuery = true)
 	Optional<List<Task>> findByUser(String userName);
+	
+
+	@Query(value="SELECT * FROM task WHERE idCategory=?1", nativeQuery = true)
+	Optional<List<Task>> findByCategoryId(Long id);
 }

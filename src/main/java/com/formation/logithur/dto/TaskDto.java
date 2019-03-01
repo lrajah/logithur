@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import com.formation.logithur.persistence.entity.Category;
 import com.formation.logithur.persistence.entity.Task;
-import com.formation.logithur.persistence.entity.User;
 
 /**
  * @author Dell
@@ -43,9 +42,9 @@ public class TaskDto {
 		this.setLabel(t.getLabel());
 		this.setPriority(t.getPriority());
 		this.setCategory(t.getCategory());
-		
 		this.setUsers(new UserDto(t.getUsers()));
 		this.setState(t.getState());
+		
 	}
 	
 	
@@ -114,6 +113,8 @@ public class TaskDto {
 	public void setUsers(UserDto users) {
 		this.users = users;
 	}
+
+
 
 	
 

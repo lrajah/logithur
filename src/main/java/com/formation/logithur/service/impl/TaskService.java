@@ -66,10 +66,10 @@ public class TaskService implements ITaskService {
 	}
 
 	@Override
-	public TaskDto modifyTask(TaskDto taskDto, Long oldTaskId) throws ParseException {
+	public TaskDto modifyTask(TaskDto taskDto) throws ParseException {
 		
 		
-		Optional<Task> task= taskRepo.findById(oldTaskId);
+		Optional<Task> task= taskRepo.findById(taskDto.getId());
 		
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
@@ -78,6 +78,19 @@ public class TaskService implements ITaskService {
 		
 		
 	}
+
+	@Override
+	public void deleteTask(TaskDto taskDto) throws ParseException {
+		// TODO Auto-generated method stub
+		taskRepo.deleteById(taskDto.getId());
+		Optional<List<Task>> tasks=taskRepo.findByCategoryId(taskDto.getCategory().getId());
+		
+		if(!tasks.isPresent()) {
+			categoryRepo.deleteById(taskDto.getCategory().getId());
+		}
+	}
+	
+	
 
 	
 

@@ -68,7 +68,7 @@ public class User {
 	 */
 	public User(UserDto user, UserRepository userRepo) {
 		Optional<User> userTmp = userRepo.findById(user.getId());
-
+		this.setId(userTmp.get().getId());
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());
@@ -82,7 +82,7 @@ public class User {
 	 * @author Arzh
 	 */
 	public User(UserDto user) {
-
+		this.setId(user.getId());
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());

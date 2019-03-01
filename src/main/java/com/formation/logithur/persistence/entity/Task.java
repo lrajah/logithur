@@ -6,8 +6,6 @@ package com.formation.logithur.persistence.entity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -52,7 +49,7 @@ public class Task {
 	@JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = true)
 	private Category category;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name = "idUser", referencedColumnName = "id", nullable = false)
 	private User users;
 	

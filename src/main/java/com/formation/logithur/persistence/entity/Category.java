@@ -19,7 +19,7 @@ public class Category {
 	
 	@Column(name="category", length = 20, nullable = false)
 	private String category;
-
+	
 	public Long getId() {
 		return id;
 	}
