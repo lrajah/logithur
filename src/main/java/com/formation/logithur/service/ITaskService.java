@@ -11,6 +11,7 @@ public interface ITaskService {
 	
 	List<TaskDto> findByUser(String userName);
 	TaskDto findById(Long id);
-	TaskDto createTask(TaskDto taskDto) throws ParseException;
+	TaskDto createTask(TaskDto taskDto, String userName) throws ParseException;
 	TaskDto modifyTask(TaskDto taskDto, Long oldTaskId) throws ParseException;
+	
 }

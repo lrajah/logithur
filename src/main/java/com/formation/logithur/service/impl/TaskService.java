@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.formation.logithur.dto.TaskDto;
 import com.formation.logithur.exception.NotFoundException;
+import com.formation.logithur.persistence.entity.Category;
 import com.formation.logithur.persistence.entity.Task;
 import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.CategoryRepository;
@@ -44,10 +45,21 @@ public class TaskService implements ITaskService {
 		return new TaskDto(task.get());
 	}
 
+	
+	
 	@Override
-	public TaskDto createTask(TaskDto taskDto) throws ParseException {
+	public TaskDto createTask(TaskDto taskDto, String userName) throws ParseException {
 		
-		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
+		Optional<User> user = userRepo.findByNickname(userName);
+		Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
+		if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+		Task task =new Task(taskDto, userRepo) ;
+		task=taskRepo.save(task);
+		user.get().getTask().add(task);
+		userRepo.save(user.get());
+		
+		return new TaskDto(task) ;
+		
 	}
 
 	@Override
@@ -55,8 +67,10 @@ public class TaskService implements ITaskService {
 		
 		
 		Optional<Task> task= taskRepo.findById(oldTaskId);
+		
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
+		
 		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
 		
 		

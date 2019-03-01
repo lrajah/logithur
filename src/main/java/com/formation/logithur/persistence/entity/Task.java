@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,8 +51,9 @@ public class Task {
 	@ManyToOne
 	@JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = true)
 	private Category category;
-	@ManyToMany
-	@JoinColumn(name = "idUser", referencedColumnName = "id")
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "idUser", referencedColumnName = "id", nullable = false)
 	private List<User> users;
 	
 	
@@ -67,7 +69,7 @@ public class Task {
 		this.setDeadline(horaire);
 		this.setId(t.getId());
 		this.setLabel(t.getLabel());
-		this.setPriority(t.getLabel());
+		this.setPriority(t.getPriority());
 		this.setUsers(t.getUsers().stream().map(c-> new User(c,userRepo)).collect(Collectors.toList()));
 	}
 	public Task() {
