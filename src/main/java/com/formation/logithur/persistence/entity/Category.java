@@ -18,11 +18,7 @@ public class Category {
 	
 	@Column(name="category", length = 20, nullable = false)
 	private String category;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'master' of https://github.com/lrajah/logithur
 	public Long getId() {
 		return id;
 	}
@@ -39,10 +35,7 @@ public class Category {
 		this.category = category;
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/lrajah/logithur
+
 	
 	
 
