@@ -45,6 +45,7 @@ public class User {
 	
 	@Column (name = "mark")
 	private Double mark;
+	
 	@OneToMany
 	@JoinColumn(name = "idTask", referencedColumnName = "id")
 	private List<Task> task;

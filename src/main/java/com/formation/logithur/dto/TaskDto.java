@@ -6,8 +6,6 @@ package com.formation.logithur.dto;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.formation.logithur.persistence.entity.Category;
 import com.formation.logithur.persistence.entity.Task;
@@ -47,22 +45,18 @@ public class TaskDto {
 		
 	}
 	
-	
 	public TaskDto() {
 		
 	}
 	
 	
-
 	public boolean isState() {
 		return state;
 	}
 
-
 	public void setState(boolean state) {
 		this.state = state;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -104,18 +98,12 @@ public class TaskDto {
 		this.category = category;
 	}
 
-
 	public UserDto getUsers() {
 		return users;
 	}
 
-
 	public void setUsers(UserDto users) {
 		this.users = users;
 	}
-
-
-
-	
 
 }

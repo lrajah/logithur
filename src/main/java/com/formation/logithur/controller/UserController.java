@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.logithur.dto.UserDto;
-import com.formation.logithur.persistence.repository.UserRepository;
 import com.formation.logithur.service.IUserService;
 
 /**
