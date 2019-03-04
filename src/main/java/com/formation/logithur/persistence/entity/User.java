@@ -13,39 +13,40 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.UserDto;
+import com.formation.logithur.exception.NotFoundException;
 import com.formation.logithur.persistence.repository.UserRepository;
 
 /**
- * Entité Utilisateur <b><b>Class Entité Utilisateur - 
- * Définition de la table et de ses attributs
+ * Entité Utilisateur <b><b>Class Entité Utilisateur - Définition de la table et
+ * de ses attributs
  * 
  * @author Arzh
  * @version 1.0.0
  */
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
-	
+
 	// Attribute's Declaration
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column (name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
-	@Column (name = "email", length = 60, unique = true, nullable = false)
+
+	@Column(name = "email", length = 60, unique = true, nullable = false)
 	private String email;
-	
-	@Column (name = "nickname", length = 20, unique = true, nullable = false)
+
+	@Column(name = "nickname", length = 20, unique = true, nullable = false)
 	private String nickname;
-	
-	@Column (name = "password", length = 20, nullable = false)
+
+	@Column(name = "password", length = 20, nullable = false)
 	private String password;
-	
-	@Column (name = "mark")
+
+	@Column(name = "mark", nullable = true)
 	private Double mark;
 	@OneToMany
-	@JoinColumn(name = "idTask", referencedColumnName = "id")
+	@JoinColumn(name = "idTask", referencedColumnName = "id", nullable = true)
 	private List<Task> task;
 
 	// Constructor
@@ -59,8 +60,8 @@ public class User {
 	}
 
 	/**
-	 * Constructeur User <b><b>Constructeur avec un Dto et un Repository d'utilisateur
-	 * en paramètre
+	 * Constructeur User <b><b>Constructeur avec un Dto et un Repository
+	 * d'utilisateur en paramètre
 	 * 
 	 * @param user     - Dto Utilisateur
 	 * @param userRepo - Repository Utilisateur
@@ -69,10 +70,19 @@ public class User {
 	public User(UserDto user, UserRepository userRepo) {
 		Optional<User> userTmp = userRepo.findById(user.getId());
 
-		this.setEmail(user.getEmail());
-		this.setNickname(user.getNickname());
-		this.setMark(user.getMark());
-		this.setPassword(userTmp.get().getPassword());
+		if (!(userTmp.isPresent())) {
+			
+			throw new NotFoundException("This user does not exist !");			
+
+		} else {
+
+			this.setId(userTmp.get().getId());
+			this.setEmail(user.getEmail());
+			this.setNickname(user.getNickname());
+			this.setMark(user.getMark());
+			this.setPassword(userTmp.get().getPassword());
+
+		}
 	}
 
 	/**
@@ -83,6 +93,7 @@ public class User {
 	 */
 	public User(UserDto user) {
 
+		this.setId(user.getId());
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());
@@ -114,7 +125,7 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -139,5 +150,4 @@ public class User {
 		this.task = task;
 	}
 
-	
 }

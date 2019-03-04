@@ -21,7 +21,7 @@ import com.formation.logithur.service.IUserService;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value="/api/client/")
+@RequestMapping(value="/api/client")
 public class UserController {
 		
 		@Autowired
@@ -35,8 +35,8 @@ public class UserController {
 		
 		@PutMapping(value="/modify")
 		@ResponseBody
-		public UserDto userModify(@RequestBody UserDto userModifyDto, @RequestBody UserRepository userModifyRepo) {
-			return userServ.userModify(userModifyDto, userModifyRepo);
+		public UserDto userModify(@RequestBody UserDto userModifyDto) {
+			return userServ.userModify(userModifyDto);
 		}
 		
 }
