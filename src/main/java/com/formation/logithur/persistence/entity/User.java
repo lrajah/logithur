@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.UserDto;
+import com.formation.logithur.exception.NotFoundException;
 import com.formation.logithur.persistence.repository.UserRepository;
 
 /**
