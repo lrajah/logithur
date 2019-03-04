@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.formation.logithur.persistence.entity.Category;
-import com.formation.logithur.persistence.entity.User;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	

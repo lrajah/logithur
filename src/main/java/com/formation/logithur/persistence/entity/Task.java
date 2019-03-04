@@ -7,7 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -124,10 +123,7 @@ public class Task {
 	}
 	public void setUsers(User users) {
 		this.users = users;
-	}
-
-	
-	
+	}	
 
 }
 

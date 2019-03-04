@@ -54,19 +54,24 @@ public class UserService implements IUserService {
 			
 			throw new NotFoundException("This user does not exist !");	
 					
-		} else if (userDto.getEmail() != userExist.get().getEmail()) {
+		} else if (userDto.getEmail().compareTo(userExist.get().getEmail()) != 0) {
 			
-			if (userRepo.findByEmail(userExist.get().getEmail()).isPresent()) {
-				
-				throw new InvalidOperationException("Email already used !");
+			if (userRepo.findByEmail(userModify.getEmail()).isPresent()) {		
+							
+			throw new InvalidOperationException("Email already used !");
+			
 			}
-										
-		} else if (userDto.getNickname() != userExist.get().getNickname()) {
+			
+		} else if (userDto.getNickname().compareTo(userExist.get().getNickname()) != 0) {
 			
 			throw new InvalidOperationException("The Nickname doesn't to be change !");
 		
-		} 
-		
+		} else if (userDto.getPassword().compareTo(userModify.getPassword()) != 0) {
+			
+			userModify.setPassword(userDto.getPassword());
+			
+		}
+				
 		return new UserDto(userRepo.save(userModify));	
 					
 	}
