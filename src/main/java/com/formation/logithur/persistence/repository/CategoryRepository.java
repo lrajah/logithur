@@ -6,4 +6,6 @@ import com.formation.logithur.persistence.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+	
+	
 }

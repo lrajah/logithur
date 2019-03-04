@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Category")
-
 public class Category {
 	
 	@Id
@@ -18,7 +17,7 @@ public class Category {
 	private Long id;
 	
 	@Column(name="category", length = 20, nullable = false)
-	private String login;
+	private String category;
 
 	public Long getId() {
 		return id;
@@ -28,13 +27,15 @@ public class Category {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setCategory(String category) {
+		this.category = category;
 	}
+
+	
 	
 	
 
