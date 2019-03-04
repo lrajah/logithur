@@ -24,13 +24,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.formation.logithur.persistence.entity.User;
-import com.formation.logithur.persistence.repository.CategoryRepository;
-import com.formation.logithur.persistence.repository.TaskRepository;
-import com.formation.logithur.persistence.repository.UserRepository;
 import com.formation.logithur.service.ITaskService;
 import com.formation.logithur.service.IUserService;
-import com.formation.project3.application.persistence.entity.Benevole;
-import com.formation.project3.application.service.IBenevoleService;
 
 
 /**

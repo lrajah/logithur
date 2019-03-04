@@ -16,44 +16,56 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.logithur.dto.TaskDto;
+import com.formation.logithur.exception.NotIdentifiedException;
+import com.formation.logithur.secure.utils.AuthChecker;
 import com.formation.logithur.service.ITaskService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/api/client/task")
+@RequestMapping(value = "/api/client/task")
 public class TaskController {
-	
+
 	@Autowired
 	ITaskService taskServ;
-	
-	@GetMapping(value="/{userName}")
+	@Autowired
+	private AuthChecker authChecker;
+
+	@GetMapping(value = "/{userName}")
 	@ResponseBody
-	List<TaskDto> findByUser(@PathVariable String userName){
-		
+	List<TaskDto> findByUser(@PathVariable String userName) {
+		if (authChecker.isUser() == null)
+			throw new NotIdentifiedException();
+
 		return taskServ.findByUser(userName);
-		
+
 	}
-	
-	@PostMapping(value="/add")
+
+	@PostMapping(value = "/add")
 	@ResponseBody
-	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException{
-		
-		return taskServ.createTask(taskDto, taskDto.getUsers().getNickname() );
-		
+	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException {
+		if (authChecker.isUser() == null)
+			throw new NotIdentifiedException();
+
+		return taskServ.createTask(taskDto, taskDto.getUsers().getNickname());
+
 	}
-	
-	@PutMapping(value="/modify")
+
+	@PutMapping(value = "/modify")
 	@ResponseBody
 	TaskDto modifyTask(@RequestBody TaskDto taskDto) throws ParseException {
-		
+		if (authChecker.isUser() == null)
+			throw new NotIdentifiedException();
 		return taskServ.modifyTask(taskDto);
-		
+
 	}
-	@DeleteMapping(value="/delete")
+
+	@DeleteMapping(value = "/delete")
 	@ResponseBody
+
 	void deleteTask(@RequestBody TaskDto taskDto) throws ParseException {
-		
-		 taskServ.deleteTask(taskDto);
-		
+		if (authChecker.isUser() == null)
+			throw new NotIdentifiedException();
+		taskServ.deleteTask(taskDto);
+
 	}
 }
