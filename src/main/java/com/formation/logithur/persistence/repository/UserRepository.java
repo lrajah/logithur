@@ -16,11 +16,14 @@ import com.formation.logithur.persistence.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Query(value="SELECT * FROM user WHERE id=?1", nativeQuery = true)
-	Optional<User> findById(Long user);
+	Optional<User> findById(Long id);
 	
 	@Query(value="SELECT * FROM user WHERE email=?1", nativeQuery = true)
-	Optional<User> findByEmail(String user);
+	Optional<User> findByEmail(String email);
 	
 	@Query(value="SELECT * FROM user WHERE nickname=?1", nativeQuery = true)
 	Optional<User> findByNickname(String user);	
+	
+	@Query(value="SELECT * FROM user WHERE nickname=?1 AND password=?2", nativeQuery = true)
+	Optional<User> findByNickname(String nickname, String password);
 }
