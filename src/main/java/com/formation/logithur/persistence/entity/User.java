@@ -69,10 +69,19 @@ public class User {
 	public User(UserDto user, UserRepository userRepo) {
 		Optional<User> userTmp = userRepo.findById(user.getId());
 		this.setId(userTmp.get().getId());
-		this.setEmail(user.getEmail());
-		this.setNickname(user.getNickname());
-		this.setMark(user.getMark());
-		this.setPassword(userTmp.get().getPassword());
+		if (!(userTmp.isPresent())) {
+			
+			throw new NotFoundException("This user does not exist !");			
+
+		} else {
+
+			this.setId(userTmp.get().getId());
+			this.setEmail(user.getEmail());
+			this.setNickname(user.getNickname());
+			this.setMark(user.getMark());
+			this.setPassword(userTmp.get().getPassword());
+
+		}
 	}
 
 	/**
