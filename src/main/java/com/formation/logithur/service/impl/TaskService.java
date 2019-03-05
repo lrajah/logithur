@@ -52,11 +52,7 @@ public class TaskService implements ITaskService {
 		
 		Optional<User> user = userRepo.findByNickname(userName);
 		
-		if(taskDto.getCategory()!=null) {
-			Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
-			if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
-			else taskDto.setCategory(cat.get());
-		}
+		taskDto=checkCategoryIfPresent(taskDto);
 		
 		Task task =new Task(taskDto, userRepo) ;
 		user.get().getTask().add(task);
@@ -74,17 +70,28 @@ public class TaskService implements ITaskService {
 		
 		
 		Optional<Task> task= taskRepo.findById(taskDto.getId());
-		if(taskDto.getCategory()!=null) {
-			Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
-			if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
-			else taskDto.setCategory(cat.get());
-		}
+		taskDto = checkCategoryIfPresent(taskDto);
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
 		
 		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
 		
 		
+	}
+
+	private TaskDto checkCategoryIfPresent(TaskDto taskDto) {
+		if(taskDto.getCategory()!=null) {
+			Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
+			if(!cat.isPresent()) {
+				taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+				return taskDto;
+			}
+			else {
+				taskDto.setCategory(cat.get());
+				return taskDto;
+			}
+		}
+		return taskDto;
 	}
 
 	@Override
