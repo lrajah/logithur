@@ -74,7 +74,11 @@ public class TaskService implements ITaskService {
 		
 		
 		Optional<Task> task= taskRepo.findById(taskDto.getId());
-		
+		if(taskDto.getCategory()!=null) {
+			Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
+			if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+			else taskDto.setCategory(cat.get());
+		}
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
 		
