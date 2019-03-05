@@ -71,6 +71,7 @@ public class User {
 	public User(UserDto user, UserRepository userRepo) {
 		Optional<User> userTmp = userRepo.findById(user.getId());
 		this.setId(userTmp.get().getId());
+		
 		if (!(userTmp.isPresent())) {
 			
 			throw new NotFoundException("This user does not exist !");			
