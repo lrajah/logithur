@@ -74,7 +74,9 @@ public class TaskService implements ITaskService {
 		// TODO check if task exist in db
 		if(!task.isPresent()) throw new NotFoundException("La tache demandée n'existe pas");
 		
-		return new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
+				TaskDto tmp = new TaskDto(taskRepo.save(new Task(taskDto, userRepo))) ;
+				checkIfCategoryEmpty(taskDto);
+				return tmp;
 		
 		
 	}
@@ -98,6 +100,10 @@ public class TaskService implements ITaskService {
 	public void deleteTask(TaskDto taskDto) throws ParseException {
 		// TODO Auto-generated method stub
 		taskRepo.deleteById(taskDto.getId());
+		checkIfCategoryEmpty(taskDto);
+	}
+
+	private void checkIfCategoryEmpty(TaskDto taskDto) {
 		Optional<List<Task>> tasks=taskRepo.findByCategoryId(taskDto.getCategory().getId());
 		
 		if(!tasks.isPresent()) {
