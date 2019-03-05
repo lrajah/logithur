@@ -51,9 +51,13 @@ public class TaskService implements ITaskService {
 	public TaskDto createTask(TaskDto taskDto, String userName) throws ParseException {
 		
 		Optional<User> user = userRepo.findByNickname(userName);
-		Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
-		if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
-		else taskDto.setCategory(cat.get());
+		
+		if(taskDto.getCategory()!=null) {
+			Optional<Category> cat=categoryRepo.findByCategory(taskDto.getCategory().getCategory());
+			if(!cat.isPresent()) taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+			else taskDto.setCategory(cat.get());
+		}
+		
 		Task task =new Task(taskDto, userRepo) ;
 		user.get().getTask().add(task);
 		task.setUsers(user.get());
