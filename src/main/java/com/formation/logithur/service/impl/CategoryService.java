@@ -27,8 +27,6 @@ public class CategoryService implements ICategoryService {
 	}
 	
 	
-	
-	
 	@Override
 	public CategoryDto modifyCategory(CategoryDto categoryDto) {
 		return categoryDto;
@@ -49,12 +47,5 @@ public class CategoryService implements ICategoryService {
 		
 	}
 	
-	
-	@Override
-	public Category findByCategory(String category) {
-		Optional<Category> Category = categoryRepo.findByCategory(category);
-		return Category.get();
-			
-	}
 	
 }
