@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.logithur.dto.TaskDto;
+import com.formation.logithur.exception.InvalidOperationException;
 import com.formation.logithur.exception.NotIdentifiedException;
 import com.formation.logithur.secure.utils.AuthChecker;
 import com.formation.logithur.service.ITaskService;
@@ -35,6 +36,9 @@ public class TaskController {
 	List<TaskDto> findByUser(@PathVariable String userName) {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
+		else if(authChecker.isUser().getNickname().compareTo(userName)!=0) {
+			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+		}
 
 		return taskServ.findByUser(userName);
 
@@ -45,6 +49,9 @@ public class TaskController {
 	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
+		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
+			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+		}
 
 		return taskServ.createTask(taskDto, taskDto.getUsers().getNickname());
 
@@ -55,6 +62,9 @@ public class TaskController {
 	TaskDto modifyTask(@RequestBody TaskDto taskDto) throws ParseException {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
+		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
+			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+		}
 		return taskServ.modifyTask(taskDto);
 
 	}
@@ -65,6 +75,9 @@ public class TaskController {
 	void deleteTask(@RequestBody TaskDto taskDto) throws ParseException {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
+		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
+			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+		}
 		taskServ.deleteTask(taskDto);
 
 	}
