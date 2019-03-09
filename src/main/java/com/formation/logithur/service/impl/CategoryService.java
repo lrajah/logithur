@@ -17,35 +17,29 @@ public class CategoryService implements ICategoryService {
 	@Autowired
 	CategoryRepository categoryRepo;
 	
-	
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto, String category) {
-		Category createCategory = new Category();
 		
-			
+		Category createCategory = new Category();
 		return new CategoryDto(categoryRepo.save(createCategory));
 	}
 	
 	
 	@Override
 	public CategoryDto modifyCategory(CategoryDto categoryDto) {
-		return categoryDto;
 		
+		return categoryDto;
 	}
 	
 	@Override
 	public CategoryDto shareCategory(CategoryDto categoryDto) {
+		
 		return categoryDto;
-		
-		
 	}
 	
 	@Override
 	public void deleteCategory(CategoryDto categoryDto) {
+	
 		categoryRepo.deleteById(categoryDto.getId());
-		
-		
 	}
-	
-	
 }

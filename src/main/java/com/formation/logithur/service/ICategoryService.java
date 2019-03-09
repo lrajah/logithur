@@ -20,7 +20,7 @@ public interface ICategoryService {
 	 * @param category
 	 * @return
 	 */
-	Optional<Category> findByCategory(String category);	
+	//Optional<Category> findByCategory(String category);	
 	
 	/**
 	 * Method to create a new category
