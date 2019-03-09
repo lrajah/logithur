@@ -29,7 +29,7 @@ public interface ICategoryService {
 	 * @return
 	 * @throws ParseException
 	 */
-	CategoryDto createCategory(CategoryDto categoryDto, String category) throws ParseException;
+	CategoryDto createCategory(CategoryDto categoryDto, String category);
 	
 	/**
 	 * Method to modify a current category
@@ -37,7 +37,7 @@ public interface ICategoryService {
 	 * @return
 	 * @throws ParseException
 	 */
-	CategoryDto modifyCategory(CategoryDto categoryDto) throws ParseException;
+	CategoryDto modifyCategory(CategoryDto categoryDto);
 	
 	/**
 	 * Method to share a category with different users
@@ -45,13 +45,13 @@ public interface ICategoryService {
 	 * @return
 	 * @throws ParseException
 	 */
-	CategoryDto shareCategory(CategoryDto categoryDto) throws ParseException;
+	CategoryDto shareCategory(CategoryDto categoryDto);
 	
 	/**
 	 * Method to 
 	 * @param categoryDto
 	 * @throws ParseException
 	 */
-	void deleteCategory(CategoryDto categoryDto) throws ParseException;
+	void deleteCategory(CategoryDto categoryDto);
 
 }
