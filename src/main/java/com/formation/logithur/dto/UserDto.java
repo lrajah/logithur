@@ -63,12 +63,13 @@ public class UserDto {
 	 * @author Arzh
 	 */
 	public UserDto(User user) {
-		
+
 		this.setId(user.getId());
 		this.setEmail(user.getEmail());
 		this.setNickname(user.getNickname());
 		this.setMark(user.getMark());
 		this.setPassword(null);
+
 	}
 
 	// Getters and Setters
