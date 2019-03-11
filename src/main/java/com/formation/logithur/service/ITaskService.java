@@ -9,8 +9,10 @@ public interface ITaskService {
 	
 	List<TaskDto> findByUser(String userName);
 	TaskDto findById(Long id);
+	TaskDto checkIfTaskAlreadyExist(TaskDto taskDto);
 	TaskDto createTask(TaskDto taskDto, String userName) throws ParseException;
 	TaskDto modifyTask(TaskDto taskDto) throws ParseException;
 	void deleteTask(TaskDto taskDto) throws ParseException;
+	
 	
 }
