@@ -32,8 +32,12 @@ public class UserService implements IUserService {
 		User userNew = new User(userDto);
 		Optional<User> userExistEmail = userRepo.findByEmail(userNew.getEmail());
 		Optional<User> userExistNickname = userRepo.findByNickname(userNew.getNickname());
-
-		if (!(DataVerification.checkEmail(userNew.getEmail()))) {
+		
+		if ((userNew.getEmail()) == null || (userNew.getNickname()) == null || (userNew.getPassword()) == null) {
+			
+			throw new InvalidOperationException("One or several fields are empty !");
+		
+		} else if (!(DataVerification.checkEmail(userNew.getEmail()))) {
 
 			throw new InvalidOperationException("This Email is invalid");
 
@@ -65,7 +69,11 @@ public class UserService implements IUserService {
 		User userModify = new User(userDto, userRepo);
 		Optional<User> userExist = userRepo.findById(userModify.getId());
 
-		if (!(userExist.isPresent())) {
+		if ((userModify.getEmail()) == null || (userModify.getNickname()) == null || (userModify.getPassword()) == null) {
+			
+			throw new InvalidOperationException("One or several fields are empty !");
+			
+		} else if (!(userExist.isPresent())) {
 
 			throw new NotFoundException("This User does not exist !");
 
@@ -81,20 +89,14 @@ public class UserService implements IUserService {
 
 			throw new InvalidOperationException("This Nickname is invalid");
 
-		} else if (userDto.getEmail().compareTo(userExist.get().getEmail()) != 0) {
-
-			if (userRepo.findByEmail(userModify.getEmail()).isPresent()) {
+		} else if ((userModify.getEmail().compareTo(userExist.get().getEmail()) != 0) && (userRepo.findByEmail(userModify.getEmail()).isPresent())) {
 
 				throw new InvalidOperationException("Email already used !");
-			}
 
-		} else if (userDto.getNickname().compareTo(userExist.get().getNickname()) != 0) {
+		} else if (userModify.getNickname().compareTo(userExist.get().getNickname()) != 0) {
 
 			throw new InvalidOperationException("The Nickname doesn't to be change !");
 
-		} else if (userDto.getPassword().compareTo(userModify.getPassword()) != 0) {
-
-			userModify.setPassword(userDto.getPassword());
 		}
 
 		return new UserDto(userRepo.save(userModify));
