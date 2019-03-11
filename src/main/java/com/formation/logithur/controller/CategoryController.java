@@ -21,35 +21,34 @@ import com.formation.logithur.service.ICategoryService;
  */
 
 @RestController
-@RequestMapping(value="/api/client/category")
+@RequestMapping(value = "/api/client/category")
 public class CategoryController {
-	
-	
+
 	@Autowired
 	ICategoryService categoryServ;
-
+	
 	@PostMapping(value = "/add")
 	@ResponseBody
 	CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
 		return categoryServ.createCategory(categoryDto, categoryDto.getCategory());
 	}
-	
+
 	@PutMapping(value = "/modify")
 	@ResponseBody
 	CategoryDto modifyCategory(@RequestBody CategoryDto categoryDto) {
 		return categoryServ.modifyCategory(categoryDto);
 	}
-	
+
 	@PostMapping(value = "/share")
 	@ResponseBody
 	CategoryDto shareCategory(@RequestBody CategoryDto categoryDto) {
 		return categoryServ.shareCategory(categoryDto);
 	}
-	
+
 	@DeleteMapping(value = "/delete")
 	@ResponseBody
 	void deleteCategory(@RequestBody CategoryDto categoryDto) {
 		categoryServ.deleteCategory(categoryDto);
 	}
-	
+
 }
