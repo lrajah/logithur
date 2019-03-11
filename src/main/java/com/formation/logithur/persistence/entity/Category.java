@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.CategoryDto;
-import com.formation.logithur.persistence.repository.CategoryRepository;
 import com.formation.logithur.persistence.repository.UserRepository;
 
 @Entity
@@ -32,7 +31,11 @@ public class Category {
 	public Category(CategoryDto category, UserRepository userRepo) {
 		this.setId(category.getId());
 		this.setCategory(category.getCategory());
-//		this.setUsers(new User(category.getUsers(), userRepo));
+		this.setUsers(new User());
+	}
+	
+	public Category() {
+		
 	}
 
 	public Long getId() {
@@ -51,17 +54,16 @@ public class Category {
 		this.category = category;
 	}
 
-	public boolean isPresent() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public User getUsers() {
 		return users;
 	}
 
 	public void setUsers(User users) {
 		this.users = users;
+	}
+
+	public boolean isPresent() {
+		return false;
 	}
 
 }
