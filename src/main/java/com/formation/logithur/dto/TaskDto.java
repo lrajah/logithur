@@ -34,7 +34,7 @@ public class TaskDto {
 		
 		this.setId(t.getId());
 	    Date date = t.getDeadline(); 
-	    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+	    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
 	    String strDate = dateFormat.format(date);
 		this.setDeadline(strDate);
 		this.setLabel(t.getLabel());

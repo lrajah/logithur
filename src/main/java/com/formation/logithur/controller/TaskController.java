@@ -2,12 +2,10 @@ package com.formation.logithur.controller;
 
 import java.text.ParseException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formation.logithur.dto.TaskDto;
 import com.formation.logithur.exception.InvalidOperationException;
 import com.formation.logithur.exception.NotIdentifiedException;
+import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.secure.utils.AuthChecker;
 import com.formation.logithur.service.ITaskService;
 
@@ -31,16 +30,17 @@ public class TaskController {
 	@Autowired
 	private AuthChecker authChecker;
 
-	@GetMapping(value = "/{userName}")
+	@GetMapping
 	@ResponseBody
-	List<TaskDto> findByUser(@PathVariable String userName) {
+	List<TaskDto> findByUser() {
+		User user=(User) authChecker.isUser();
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
-		else if(authChecker.isUser().getNickname().compareTo(userName)!=0) {
+		else if(authChecker.isUser().getNickname().compareTo(user.getNickname())!=0) {
 			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
 		}
 
-		return taskServ.findByUser(userName);
+		return taskServ.findByUser(user.getNickname());
 
 	}
 
@@ -69,7 +69,7 @@ public class TaskController {
 
 	}
 
-	@DeleteMapping(value = "/delete")
+	@PostMapping(value = "/delete")
 	@ResponseBody
 
 	void deleteTask(@RequestBody TaskDto taskDto) throws ParseException {

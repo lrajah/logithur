@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.formation.logithur.dto.UserDto;
 import com.formation.logithur.exception.InvalidOperationException;
 import com.formation.logithur.exception.NotFoundException;
+import com.formation.logithur.exception.NotIdentifiedException;
 import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.UserRepository;
+import com.formation.logithur.secure.utils.AuthChecker;
 import com.formation.logithur.service.IUserService;
 
 /**
@@ -24,7 +26,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	UserRepository userRepo;
-
+	
 	@Override
 	public UserDto userNew(UserDto userDto) {
 
@@ -91,5 +93,7 @@ public class UserService implements IUserService {
 		}
 		
 	}
+
+	
 	
 }

@@ -36,4 +36,6 @@ public interface IUserService {
 	 */
 	User findByNickname(String nickname, String password);
 	
+	
+	
 }

@@ -57,7 +57,7 @@ public class Task {
 		this.setCategory(t.getCategory());
 		this.setDeadline(deadline);
 		
-		SimpleDateFormat formatDate=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat formatDate=new SimpleDateFormat("dd/MM/yyyy");
 		formatDate.setLenient(false);
 		
 		//TODO exception gérer
@@ -67,6 +67,7 @@ public class Task {
 		this.setLabel(t.getLabel());
 		this.setPriority(t.getPriority());
 		this.setUsers(new User(t.getUsers(), userRepo));
+		this.setState(t.isState());
 	}
 	public Task() {
 		
