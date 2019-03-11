@@ -19,7 +19,7 @@ public class CategoryDto {
 
 	private String category;
 	
-	private String users;
+	private UserDto users;
 	
 
 	
@@ -32,6 +32,7 @@ public class CategoryDto {
 	public CategoryDto(Category category) {
 		this.setId(category.getId());
 		this.setCategory(category.getCategory());
+		this.setUsers(new UserDto(category.getUsers()));
 	}
 	
 	
@@ -44,7 +45,7 @@ public class CategoryDto {
 
 	
 	public boolean isPresent() {
-		return true;
+		return false;
 	}
 
 
@@ -66,11 +67,11 @@ public class CategoryDto {
 		this.category = category;
 	}
 
-	public String getUsers() {
+	public UserDto getUsers() {
 		return users;
 	}
 
-	public void setUsers(String users) {
+	public void setUsers(UserDto users) {
 		this.users = users;
 	}
 
