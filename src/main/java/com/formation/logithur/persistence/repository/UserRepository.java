@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmail(String email);
 	
 	@Query(value="SELECT * FROM user WHERE nickname=?1", nativeQuery = true)
-	Optional<User> findByNickname(String user);	
+	Optional<User> findByNickname(String nickname);	
 	
 	@Query(value="SELECT * FROM user WHERE nickname=?1 AND password=?2", nativeQuery = true)
 	Optional<User> findByNickname(String nickname, String password);

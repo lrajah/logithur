@@ -8,10 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.formation.logithur.persistence.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-	
-	@Query(value="SELECT * FROM Category WHERE category=?1", nativeQuery = true)
-	Optional<Category> findByCategory(String category);	
 
-	
-	
+	@Query(value = "SELECT * FROM Category WHERE category=?1", nativeQuery = true)
+	Optional<Category> findByCategory(String category);
+
 }

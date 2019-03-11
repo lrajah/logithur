@@ -37,7 +37,7 @@ public class TaskController {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(user.getNickname())!=0) {
-			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+			throw new InvalidOperationException("This user requested is not the user logged");
 		}
 
 		return taskServ.findByUser(user.getNickname());
@@ -50,7 +50,7 @@ public class TaskController {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
-			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+			throw new InvalidOperationException("This user requested is not the user logged");
 		}
 
 		return taskServ.createTask(taskDto, taskDto.getUsers().getNickname());
@@ -63,7 +63,7 @@ public class TaskController {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
-			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+			throw new InvalidOperationException("This user requested is not the user logged");
 		}
 		return taskServ.modifyTask(taskDto);
 
@@ -76,7 +76,7 @@ public class TaskController {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {
-			throw new InvalidOperationException("L'utilisateur demandé n'est pas l'utilisateur connecté");
+			throw new InvalidOperationException("This user requested is not the user logged");
 		}
 		taskServ.deleteTask(taskDto);
 
