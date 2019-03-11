@@ -34,7 +34,7 @@ public class DataVerification {
 	 */
 	public static boolean checkPassword(String password) {
 		
-		return password.matches("^(?:(?=.+[a-z])(?=.+[A-Z])(?=.+[\\d])(?=.+[;:!?%$£€§&=+*_\\/-]))[A-Za-z\\d;:!?%$£€§&=+*_\\/-]{8,30}$");
+		return password.matches("^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[;:!?%$£€§&=+*_\\/-]))[A-Za-z\\d;:!?%$£€§&=+*_\\/-]{8,30}$");
 	}
 
 	/**

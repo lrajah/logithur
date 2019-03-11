@@ -74,7 +74,7 @@ public class User {
 			this.setEmail(user.getEmail());
 			this.setNickname(user.getNickname());
 			this.setMark(user.getMark());
-			this.setPassword(userTmp.get().getPassword());
+			this.setPassword(user.getPassword());
 	}
 
 	/**
