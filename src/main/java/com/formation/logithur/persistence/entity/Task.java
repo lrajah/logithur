@@ -42,7 +42,7 @@ public class Task {
 	private Date deadline;
 	
 	@Column (name = "state", nullable=false)
-	private boolean state;
+	private Integer state;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCategory", referencedColumnName = "id", nullable = true)
@@ -67,17 +67,18 @@ public class Task {
 		this.setLabel(t.getLabel());
 		this.setPriority(t.getPriority());
 		this.setUsers(new User(t.getUsers(), userRepo));
-		this.setState(t.isState());
+		this.setState(t.getState());
 	}
 	public Task() {
 		
 	}
 	
 	
-	public boolean getState() {
+	
+	public Integer getState() {
 		return state;
 	}
-	public void setState(boolean state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 	public Category getCategory() {

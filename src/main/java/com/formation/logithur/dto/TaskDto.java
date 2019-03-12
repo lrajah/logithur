@@ -26,7 +26,7 @@ public class TaskDto {
 
 	private CategoryDto category;
 	
-	private boolean state;
+	private Integer state;
 
 	private UserDto users;
 
@@ -50,11 +50,13 @@ public class TaskDto {
 	}
 	
 	
-	public boolean isState() {
+	
+
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(boolean state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
