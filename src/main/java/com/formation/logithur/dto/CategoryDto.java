@@ -19,7 +19,7 @@ public class CategoryDto {
 
 	private String category;
 	
-	private UserDto users;
+	private String user;
 	
 
 	
@@ -32,10 +32,9 @@ public class CategoryDto {
 	public CategoryDto(Category category) {
 		this.setId(category.getId());
 		this.setCategory(category.getCategory());
-		this.setUsers(new UserDto(category.getUsers()));
+		this.setUser(category.getUser());
+	
 	}
-	
-	
 	/**
 	 * Dto Category Constructor (default)
 	 */
@@ -67,12 +66,16 @@ public class CategoryDto {
 		this.category = category;
 	}
 
-	public UserDto getUsers() {
-		return users;
+
+	public String getUser() {
+		return user;
 	}
 
-	public void setUsers(UserDto users) {
-		this.users = users;
+
+	public void setUser(String user) {
+		this.user = user;
 	}
+
+	
 
 }

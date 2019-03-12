@@ -1,5 +1,7 @@
 package com.formation.logithur.persistence.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,14 +26,15 @@ public class Category {
 	@Column(name = "category", length = 20, nullable = false)
 	private String category;
 
-	@ManyToOne
-	@JoinColumn(name = "idUser", referencedColumnName = "id", unique = true, nullable = false)
-	private User users;
+	@Column(name = "user", nullable = false)
+	private String user;
 
-	public Category(CategoryDto category, UserRepository userRepo) {
-		this.setId(category.getId());
-		this.setCategory(category.getCategory());
-		this.setUsers(new User());
+	public Category(CategoryDto categoryDto, UserRepository userRepo) {
+		this.setId(categoryDto.getId());
+		this.setCategory(categoryDto.getCategory());
+		this.setUser(categoryDto.getUser());
+		
+		
 	}
 	
 	public Category() {
@@ -54,12 +57,14 @@ public class Category {
 		this.category = category;
 	}
 
-	public User getUsers() {
-		return users;
+	
+
+	public String getUser() {
+		return user;
 	}
 
-	public void setUsers(User users) {
-		this.users = users;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 	public boolean isPresent() {

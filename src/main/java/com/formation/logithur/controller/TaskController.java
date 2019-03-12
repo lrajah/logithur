@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +32,7 @@ public class TaskController {
 	@GetMapping
 	@ResponseBody
 	List<TaskDto> findByUser() {
-		User user=(User) authChecker.isUser();
+		User user= authChecker.isUser();
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(user.getNickname())!=0) {

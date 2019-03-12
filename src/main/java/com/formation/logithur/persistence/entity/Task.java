@@ -54,7 +54,7 @@ public class Task {
 	
 	
 	public Task(TaskDto t, UserRepository userRepo) throws ParseException {
-		this.setCategory(t.getCategory());
+		this.setCategory(new Category(t.getCategory(), userRepo));
 		this.setDeadline(deadline);
 		
 		SimpleDateFormat formatDate=new SimpleDateFormat("dd/MM/yyyy");

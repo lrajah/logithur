@@ -12,6 +12,7 @@ import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.persistence.repository.UserRepository;
 import com.formation.logithur.secure.utils.AuthChecker;
 import com.formation.logithur.service.IUserService;
+import com.formation.logithur.tools.DataVerification;
 
 /**
  * Service Utilisateur <b><b>Class Service Utilisateur - Définition des

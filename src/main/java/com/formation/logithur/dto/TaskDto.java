@@ -24,7 +24,7 @@ public class TaskDto {
 
 	private String deadline;
 
-	private Category category;
+	private CategoryDto category;
 	
 	private boolean state;
 
@@ -39,7 +39,7 @@ public class TaskDto {
 		this.setDeadline(strDate);
 		this.setLabel(t.getLabel());
 		this.setPriority(t.getPriority());
-		this.setCategory(t.getCategory());
+		this.setCategory(new CategoryDto(t.getCategory()));
 		this.setUsers(new UserDto(t.getUsers()));
 		this.setState(t.getState());
 		
@@ -90,11 +90,13 @@ public class TaskDto {
 		this.deadline = deadline;
 	}
 
-	public Category getCategory() {
+	
+
+	public CategoryDto getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(CategoryDto category) {
 		this.category = category;
 	}
 

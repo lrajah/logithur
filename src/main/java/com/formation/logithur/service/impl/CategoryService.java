@@ -61,7 +61,7 @@ public class CategoryService implements ICategoryService {
 	@Override
 	public CategoryDto shareCategory(CategoryDto categoryDto) {
 		
-		return categoryDto;
+		return null;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.formation.logithur.dto.CategoryDto;
 import com.formation.logithur.dto.TaskDto;
 import com.formation.logithur.exception.InvalidOperationException;
 import com.formation.logithur.exception.NotFoundException;
@@ -108,10 +109,11 @@ public class TaskService implements ITaskService {
 		if (taskDto.getCategory() != null) {
 			Optional<Category> cat = categoryRepo.findByCategory(taskDto.getCategory().getCategory());
 			if (!cat.isPresent()) {
-				taskDto.setCategory(categoryRepo.save(taskDto.getCategory()));
+				Category cat2= new Category(taskDto.getCategory(),userRepo);
+				taskDto.setCategory(new CategoryDto(categoryRepo.save(cat2)));
 				return taskDto;
 			} else {
-				taskDto.setCategory(cat.get());
+				taskDto.setCategory(new CategoryDto( cat.get()));
 				return taskDto;
 			}
 		}
