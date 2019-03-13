@@ -1,6 +1,8 @@
 package com.formation.logithur.service.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +70,13 @@ public class CategoryService implements ICategoryService {
 	public void deleteCategory(CategoryDto categoryDto) {
 	
 		categoryRepo.deleteById(categoryDto.getId());
+	}
+
+	@Override
+	public List<CategoryDto> categoryByUser(String user) {
+		Optional<List<Category>> opt=categoryRepo.findByUser(user);
+		if(!opt.isPresent()) return null;
+		 return opt.get().stream().map(c -> new CategoryDto(c)).collect(Collectors.toList());
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.formation.logithur.service;
 
 import java.text.ParseException;
+import java.util.List;
 
 import com.formation.logithur.dto.CategoryDto;
 
@@ -56,5 +57,7 @@ public interface ICategoryService {
 	 * @throws ParseException
 	 */
 	void deleteCategory(CategoryDto categoryDto);
+	
+	List<CategoryDto> categoryByUser(String user);
 
 }
