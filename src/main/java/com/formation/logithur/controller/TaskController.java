@@ -46,7 +46,7 @@ public class TaskController {
 
 	@PostMapping(value = "/add")
 	@ResponseBody
-	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException {
+	TaskDto createTask(@RequestBody TaskDto taskDto) throws ParseException,InvalidOperationException {
 		if (authChecker.isUser() == null)
 			throw new NotIdentifiedException();
 		else if(authChecker.isUser().getNickname().compareTo(taskDto.getUsers().getNickname())!=0) {

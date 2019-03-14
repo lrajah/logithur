@@ -23,6 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.formation.logithur.exception.NotFoundException;
 import com.formation.logithur.persistence.entity.User;
 import com.formation.logithur.service.ITaskService;
 import com.formation.logithur.service.IUserService;
@@ -60,12 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {    
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception, NotFoundException {    
 		
 		auth.authenticationProvider(new AuthenticationProvider() {
 			
 			@Override
-			public Authentication authenticate(Authentication auth) throws AuthenticationException {
+			public Authentication authenticate(Authentication auth) throws AuthenticationException,NotFoundException {
 
 				final String userName = auth.getName();
 				final String password = auth.getCredentials().toString();

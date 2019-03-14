@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.formation.logithur.dto.TaskDto;
+import com.formation.logithur.exception.InvalidOperationException;
 import com.formation.logithur.persistence.repository.UserRepository;
 
 /**
@@ -53,7 +54,7 @@ public class Task {
 	private User users;
 	
 	
-	public Task(TaskDto t, UserRepository userRepo) throws ParseException {
+	public Task(TaskDto t, UserRepository userRepo) throws ParseException,InvalidOperationException {
 		this.setCategory(new Category(t.getCategory(), userRepo));
 		this.setDeadline(deadline);
 		
@@ -62,6 +63,7 @@ public class Task {
 		
 		//TODO exception gérer
 		Date horaire=formatDate.parse(t.getDeadline());
+		if(new Date().after(horaire)) throw new InvalidOperationException("Deadline must be after today");
 		this.setDeadline(horaire);
 		this.setId(t.getId());
 		this.setLabel(t.getLabel());
